@@ -43,10 +43,7 @@ biological materials as [Sample](https://github.com/nfdi4plants/isa-ro-crate-pro
 none of these four terms is validated against the base and ISA layers only; a term outside this set is reported
 as a warning.
 
-Requirement levels follow [RFC 2119](https://tools.ietf.org/html/rfc2119). MUST denotes a requirement for
-conformance, SHOULD a recommendation whose absence is reported as a warning, and MAY an optional feature. No
-shape declares `sh:closed`; properties this profile does not name are therefore neither validated nor
-prohibited.
+Requirement levels follow [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 ![The ISA-Tox model of an in vitro NAM study: source cells are prepared into a test system, exposed, read out and
 analysed, each step following a protocol record and producing the next material or
@@ -108,12 +105,11 @@ description with the SHACL shapes MAY additionally be published at the profile U
 ## Requirements
 
 An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays. A crate that
-records no exposure of a test system to a chemical does not describe an *in vitro* toxicological experiment; the
-requirement therefore applies irrespective of what else the crate contains.
+records no exposure of a test system to a chemical does not describe an *in vitro* toxicological experiment.
 
 ### Study - Adverse Outcome Pathway
 
-Is based on the [ISA Study](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study). A study addresses one Adverse Outcome Pathway via `schema:mentions`;
+Is based on the [ISA Study](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study). A study should address one Adverse Outcome Pathway via `schema:mentions`;
 its assays annotate the Key Events ([Assay - Key Event](#assay---key-event)). The referenced node is the AOP-Wiki
 entity: `@id` is `https://identifiers.org/aop/<id>`, typed `AdverseOutcomePathway`
 ([AOPO](http://aopkb.org/aop_ontology#AdverseOutcomePathway)) and [DefinedTerm](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm), with the wiki
@@ -150,7 +146,7 @@ identifiers, each identifier is a PropertyValue whose `propertyID` declares the 
 
 ### Assay - Key Event
 
-Is based on the [ISA Assay](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay). An assay measures one endpoint and names the AOP-Wiki Key Event it
+Is based on the [ISA Assay](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay). An assay measures one endpoint and names the KeyEvent it
 reads out via `schema:mentions`: `@id` is `https://identifiers.org/aop.events/<id>`, typed `KeyEvent`
 ([AOPO](http://aopkb.org/aop_ontology#KeyEvent)) and [DefinedTerm](https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm). What it measures is named in
 [BAO](https://bioassayontology.org/) terms through `measurementMethod` and `measurementTechnique`.
