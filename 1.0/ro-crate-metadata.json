@@ -1,0 +1,396 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.2/context",
+  "@graph": [
+    {
+      "@id": "https://w3id.org/ro/crate/isa-tox/1.0",
+      "@type": [
+        "Dataset",
+        "Profile"
+      ],
+      "datePublished": "2026-10-30",
+      "name": "ISA-Tox RO-Crate Profile",
+      "description": "Toxicology (in vitro New Approach Methodology) domain extension of the ISA RO-Crate Profile: the entity types, ontology-backed properties and SHACL shapes needed to describe in vitro toxicology studies.",
+      "version": "1.0.0",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "keywords": [
+        "RO-Crate",
+        "in vitro toxicology",
+        "New Approach Methodology",
+        "ISA",
+        "SHACL",
+        "FAIR",
+        "Adverse Outcome Pathway",
+        "Bioschemas",
+        "toxicology"
+      ],
+      "isProfileOf": [
+        {
+          "@id": "https://github.com/nfdi4plants/isa-ro-crate-profile"
+        },
+        {
+          "@id": "https://w3id.org/ro/crate/1.2"
+        }
+      ],
+      "identifier": "https://w3id.org/ro/crate/isa-tox/1.0",
+      "url": "https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/",
+      "author": {
+        "@id": "https://orcid.org/0009-0005-3680-0645"
+      },
+      "hasPart": [
+        {
+          "@id": "index.html"
+        },
+        {
+          "@id": "shapes/0_molecular_entity.ttl"
+        },
+        {
+          "@id": "shapes/10_doi_property_value.ttl"
+        },
+        {
+          "@id": "shapes/11_pubmed_id_property_value.ttl"
+        },
+        {
+          "@id": "shapes/12_cultured_sample_lineage.ttl"
+        },
+        {
+          "@id": "shapes/13_lab_process_protocol.ttl"
+        },
+        {
+          "@id": "shapes/1_cell_line_sample.ttl"
+        },
+        {
+          "@id": "shapes/2_lab_process_test_system_preparation.ttl"
+        },
+        {
+          "@id": "shapes/3_lab_process_exposure.ttl"
+        },
+        {
+          "@id": "shapes/4_lab_process_endpoint_readout.ttl"
+        },
+        {
+          "@id": "shapes/5_lab_process_data_analysis.ttl"
+        },
+        {
+          "@id": "shapes/6_study_aop.ttl"
+        },
+        {
+          "@id": "shapes/7_assay_key_event.ttl"
+        },
+        {
+          "@id": "shapes/8_condition_table_csvw.ttl"
+        },
+        {
+          "@id": "shapes/9_investigation_strict.ttl"
+        },
+        {
+          "@id": "shapes/ontology.ttl"
+        },
+        {
+          "@id": "shapes/profile.ttl"
+        },
+        {
+          "@id": "figures/isa-tox-model.svg"
+        }
+      ],
+      "hasResource": [
+        {
+          "@id": "#hasSpecification"
+        },
+        {
+          "@id": "#hasSHACL"
+        },
+        {
+          "@id": "#hasVocabulary"
+        }
+      ]
+    },
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "https://w3id.org/ro/crate/isa-tox/1.0"
+      }
+    },
+    {
+      "@id": "https://orcid.org/0009-0005-3680-0645",
+      "@type": "Person",
+      "name": "Jente Houweling"
+    },
+    {
+      "@id": "https://creativecommons.org/licenses/by/4.0/",
+      "@type": "CreativeWork",
+      "name": "CC BY 4.0"
+    },
+    {
+      "@id": "https://opensource.org/licenses/MIT",
+      "@type": "CreativeWork",
+      "name": "MIT License"
+    },
+    {
+      "@id": "https://github.com/nfdi4plants/isa-ro-crate-profile",
+      "@type": [
+        "CreativeWork",
+        "Profile"
+      ],
+      "name": "ISA RO-Crate Profile"
+    },
+    {
+      "@id": "https://w3id.org/ro/crate/1.2",
+      "@type": [
+        "CreativeWork",
+        "Profile"
+      ],
+      "name": "RO-Crate 1.2"
+    },
+    {
+      "@id": "index.html",
+      "@type": "File",
+      "name": "ISA-Tox RO-Crate Profile — specification",
+      "encodingFormat": "text/html",
+      "about": {
+        "@id": "https://w3id.org/ro/crate/isa-tox/1.0"
+      },
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@id": "#hasSpecification",
+      "@type": "ResourceDescriptor",
+      "name": "Profile specification",
+      "hasRole": {
+        "@id": "http://www.w3.org/ns/dx/prof/role/specification"
+      },
+      "hasArtifact": {
+        "@id": "index.html"
+      }
+    },
+    {
+      "@id": "shapes/0_molecular_entity.ttl",
+      "@type": "File",
+      "name": "0 molecular entity",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/10_doi_property_value.ttl",
+      "@type": "File",
+      "name": "10 doi property value",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/11_pubmed_id_property_value.ttl",
+      "@type": "File",
+      "name": "11 pubmed id property value",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/12_cultured_sample_lineage.ttl",
+      "@type": "File",
+      "name": "12 cultured sample lineage",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/13_lab_process_protocol.ttl",
+      "@type": "File",
+      "name": "13 lab process protocol",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/1_cell_line_sample.ttl",
+      "@type": "File",
+      "name": "1 cell line sample",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/2_lab_process_test_system_preparation.ttl",
+      "@type": "File",
+      "name": "2 lab process test system preparation",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/3_lab_process_exposure.ttl",
+      "@type": "File",
+      "name": "3 lab process exposure",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/4_lab_process_endpoint_readout.ttl",
+      "@type": "File",
+      "name": "4 lab process endpoint readout",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/5_lab_process_data_analysis.ttl",
+      "@type": "File",
+      "name": "5 lab process data analysis",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/6_study_aop.ttl",
+      "@type": "File",
+      "name": "6 study aop",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/7_assay_key_event.ttl",
+      "@type": "File",
+      "name": "7 assay key event",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/8_condition_table_csvw.ttl",
+      "@type": "File",
+      "name": "8 condition table csvw",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/9_investigation_strict.ttl",
+      "@type": "File",
+      "name": "9 investigation strict",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/ontology.ttl",
+      "@type": "File",
+      "name": "ontology",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "shapes/profile.ttl",
+      "@type": "File",
+      "name": "profile",
+      "encodingFormat": "text/turtle",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@id": "#hasSHACL",
+      "@type": "ResourceDescriptor",
+      "name": "SHACL shapes",
+      "hasRole": {
+        "@id": "http://www.w3.org/ns/dx/prof/role/validation"
+      },
+      "hasArtifact": [
+        {
+          "@id": "shapes/0_molecular_entity.ttl"
+        },
+        {
+          "@id": "shapes/10_doi_property_value.ttl"
+        },
+        {
+          "@id": "shapes/11_pubmed_id_property_value.ttl"
+        },
+        {
+          "@id": "shapes/12_cultured_sample_lineage.ttl"
+        },
+        {
+          "@id": "shapes/13_lab_process_protocol.ttl"
+        },
+        {
+          "@id": "shapes/1_cell_line_sample.ttl"
+        },
+        {
+          "@id": "shapes/2_lab_process_test_system_preparation.ttl"
+        },
+        {
+          "@id": "shapes/3_lab_process_exposure.ttl"
+        },
+        {
+          "@id": "shapes/4_lab_process_endpoint_readout.ttl"
+        },
+        {
+          "@id": "shapes/5_lab_process_data_analysis.ttl"
+        },
+        {
+          "@id": "shapes/6_study_aop.ttl"
+        },
+        {
+          "@id": "shapes/7_assay_key_event.ttl"
+        },
+        {
+          "@id": "shapes/8_condition_table_csvw.ttl"
+        },
+        {
+          "@id": "shapes/9_investigation_strict.ttl"
+        },
+        {
+          "@id": "shapes/ontology.ttl"
+        },
+        {
+          "@id": "shapes/profile.ttl"
+        }
+      ]
+    },
+    {
+      "@id": "#hasVocabulary",
+      "@type": "ResourceDescriptor",
+      "name": "Extension vocabulary",
+      "hasRole": {
+        "@id": "http://www.w3.org/ns/dx/prof/role/vocabulary"
+      },
+      "hasArtifact": {
+        "@id": "shapes/ontology.ttl"
+      }
+    },
+    {
+      "@id": "figures/isa-tox-model.svg",
+      "@type": "File",
+      "name": "The ISA-Tox model of an in vitro NAM study",
+      "encodingFormat": "image/svg+xml",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    }
+  ]
+}

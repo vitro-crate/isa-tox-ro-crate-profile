@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: MIT
+# LabProcessTestSystemPreparation — test system preparation (biological model preparation).
+# A bioschemas:LabProcess whose protocol record's intendedUse is a term of the ISA-Tox
+# preparation-types set (ontology.ttl), as the term states with inDefinedTermSet (#785).
+# Older crates are read by aliases: the additionalType labels "TestSystemPreparation"
+# and "CellCulture", and growth protocol or transfection stated without the set (#799).
+
+@prefix bioschemas: <https://bioschemas.org/> .
+@prefix bioschemas-prop: <https://bioschemas.org/properties/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tox: <https://w3id.org/ro/crate/isa-tox/1.0/> .
+@prefix validator: <https://github.com/crs4/rocrate-validator/> .
+
+tox:FindTestSystemPreparationProcesses a sh:NodeShape, validator:HiddenShape ;
+    sh:name "Identify test system preparation processes" ;
+    sh:targetClass bioschemas:LabProcess ;
+    sh:order 11 ;
+    sh:rule [
+        a sh:TripleRule ;
+        sh:subject sh:this ;
+        sh:predicate rdf:type ;
+        sh:object tox:LabProcessTestSystemPreparation ;
+        sh:condition [
+            a sh:NodeShape ;
+            sh:property [ sh:path schema:additionalType ; sh:hasValue "TestSystemPreparation" ; sh:minCount 1 ] ;
+        ] ;
+    ] ;
+    sh:rule [
+        a sh:TripleRule ;
+        sh:subject sh:this ;
+        sh:predicate rdf:type ;
+        sh:object tox:LabProcessTestSystemPreparation ;
+        sh:condition [
+            a sh:NodeShape ;
+            sh:property [ sh:path schema:additionalType ; sh:hasValue "CellCulture" ; sh:minCount 1 ] ;
+        ] ;
+    ] ;
+    sh:rule [
+        a sh:TripleRule ;
+        sh:subject sh:this ;
+        sh:predicate rdf:type ;
+        sh:object tox:LabProcessTestSystemPreparation ;
+        sh:condition [
+            a sh:NodeShape ;
+            sh:property [
+                sh:path ( bioschemas-prop:executesLabProtocol bioschemas-prop:intendedUse schema:inDefinedTermSet ) ;
+                sh:hasValue tox:preparation-types ;
+                sh:minCount 1 ;
+            ] ;
+        ] ;
+    ] ;
+    sh:rule [
+        a sh:TripleRule ;
+        sh:subject sh:this ;
+        sh:predicate rdf:type ;
+        sh:object tox:LabProcessTestSystemPreparation ;
+        sh:condition [
+            a sh:NodeShape ;
+            sh:property [
+                sh:path ( bioschemas-prop:executesLabProtocol bioschemas-prop:intendedUse ) ;
+                sh:hasValue <http://www.ebi.ac.uk/efo/EFO_0003789> ;
+                sh:minCount 1 ;
+            ] ;
+        ] ;
+    ] ;
+    sh:rule [
+        a sh:TripleRule ;
+        sh:subject sh:this ;
+        sh:predicate rdf:type ;
+        sh:object tox:LabProcessTestSystemPreparation ;
+        sh:condition [
+            a sh:NodeShape ;
+            sh:property [
+                sh:path ( bioschemas-prop:executesLabProtocol bioschemas-prop:intendedUse ) ;
+                sh:hasValue <http://purl.obolibrary.org/obo/OBI_0001152> ;
+                sh:minCount 1 ;
+            ] ;
+        ] ;
+    ] .
+
+tox:TestSystemPreparationRequirements a sh:NodeShape ;
+    sh:name "TestSystemPreparation process requirements" ;
+    sh:description "A test system preparation process MUST declare its input cells, output cultured sample, and parameters" ;
+    sh:targetClass tox:LabProcessTestSystemPreparation ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path schema:object ;
+        sh:minCount 1 ;
+        sh:message "TestSystemPreparation process MUST have at least one schema:object (input source Sample: a cell line or primary cells)" ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path schema:result ;
+        sh:minCount 1 ;
+        sh:message "TestSystemPreparation process MUST have at least one schema:result (output cultured Sample)" ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path schema:additionalProperty ;
+        sh:minCount 1 ;
+        sh:message "TestSystemPreparation process MUST have at least one schema:additionalProperty (e.g. Culture Medium)" ;
+        sh:severity sh:Violation ;
+    ] .
