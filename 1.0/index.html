@@ -63,10 +63,7 @@ biological materials as <a href="https://github.com/nfdi4plants/isa-ro-crate-pro
 <code>TestSystemPreparation</code>, <code>Exposure</code>, <code>EndpointReadout</code> or <code>DataAnalysis</code>. A step whose protocol record declares
 none of these four terms is validated against the base and ISA layers only; a term outside this set is reported
 as a warning.</p>
-<p>Requirement levels follow <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>. MUST denotes a requirement for
-conformance, SHOULD a recommendation whose absence is reported as a warning, and MAY an optional feature. No
-shape declares <code>sh:closed</code>; properties this profile does not name are therefore neither validated nor
-prohibited.</p>
+<p>Requirement levels follow <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
 <p><img alt="The ISA-Tox model of an in vitro NAM study: source cells are prepared into a test system, exposed, read out and
 analysed, each step following a protocol record and producing the next material or
 file." src="figures/isa-tox-model.svg" /></p>
@@ -115,10 +112,9 @@ value — which this profile follows.</p>
 description with the SHACL shapes MAY additionally be published at the profile URI; this is planned but not yet provided.</p>
 <h2 id="requirements">Requirements</h2>
 <p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays. A crate that
-records no exposure of a test system to a chemical does not describe an <em>in vitro</em> toxicological experiment; the
-requirement therefore applies irrespective of what else the crate contains.</p>
+records no exposure of a test system to a chemical does not describe an <em>in vitro</em> toxicological experiment.</p>
 <h3 id="study-adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study addresses one Adverse Outcome Pathway via <code>schema:mentions</code>;
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study should address one Adverse Outcome Pathway via <code>schema:mentions</code>;
 its assays annotate the Key Events (<a href="#assay---key-event">Assay - Key Event</a>). The referenced node is the AOP-Wiki
 entity: <code>@id</code> is <code>https://identifiers.org/aop/&lt;id&gt;</code>, typed <code>AdverseOutcomePathway</code>
 (<a href="http://aopkb.org/aop_ontology#AdverseOutcomePathway">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>, with the wiki
@@ -236,7 +232,7 @@ identifiers, each identifier is a PropertyValue whose <code>propertyID</code> de
 </tbody>
 </table>
 <h3 id="assay-key-event">Assay - Key Event</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and names the AOP-Wiki Key Event it
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and names the KeyEvent it
 reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://identifiers.org/aop.events/&lt;id&gt;</code>, typed <code>KeyEvent</code>
 (<a href="http://aopkb.org/aop_ontology#KeyEvent">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>. What it measures is named in
 <a href="https://bioassayontology.org/">BAO</a> terms through <code>measurementMethod</code> and <code>measurementTechnique</code>.</p>
