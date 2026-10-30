@@ -40,7 +40,10 @@
       },
       "hasPart": [
         {
-          "@id": "index.html"
+          "@id": "index.md"
+        },
+        {
+          "@id": "https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/"
         },
         {
           "@id": "shapes/0_molecular_entity.ttl"
@@ -148,9 +151,21 @@
       "name": "RO-Crate 1.2"
     },
     {
-      "@id": "index.html",
+      "@id": "index.md",
       "@type": "File",
       "name": "ISA-Tox RO-Crate Profile — specification",
+      "encodingFormat": "text/markdown",
+      "about": {
+        "@id": "https://w3id.org/ro/crate/isa-tox/1.0"
+      },
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@id": "https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/",
+      "@type": "File",
+      "name": "ISA-Tox RO-Crate Profile — specification (rendered)",
       "encodingFormat": "text/html",
       "about": {
         "@id": "https://w3id.org/ro/crate/isa-tox/1.0"
@@ -167,7 +182,7 @@
         "@id": "http://www.w3.org/ns/dx/prof/role/specification"
       },
       "hasArtifact": {
-        "@id": "index.html"
+        "@id": "https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/"
       }
     },
     {
