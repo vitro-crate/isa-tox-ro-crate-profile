@@ -1,7 +1,7 @@
 # ISA-Tox RO-Crate Profile
 
 An [RO-Crate](https://www.researchobject.org/ro-crate/) profile for *in vitro*
-toxicology studies and New Approach Methodologies. It extends the
+toxicology studies. It extends the
 [ISA RO-Crate Profile](https://github.com/nfdi4plants/isa-ro-crate-profile)
 with ontology-backed requirements on chemicals, test systems and the four
 experimental step types, and ships SHACL shapes that check them.
