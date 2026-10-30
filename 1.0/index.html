@@ -52,55 +52,24 @@ img { display: block; max-width: 100%; margin: 1.25rem auto; background: #fff;
 <p>This profile extends the <a href="https://isa-tools.org/index.html">ISA</a> <a href="https://www.researchobject.org/ro-crate/">RO-Crate</a> profile
 (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md">ISA RO-Crate Profile</a>, originally produced by <a href="https://github.com/nfdi4plants/isa-ro-crate-profile">NFDI4Plants</a>)
 with the entity types needed to describe experimental <em>in vitro</em> toxicology studies and New Approach Methodologies (NAMs).</p>
-<p>It is the domain layer of a three-layer architecture: the base <a href="https://www.researchobject.org/ro-crate/">RO-Crate</a>
-layer provides a portable, self-describing data package on <a href="https://schema.org/">Schema.org</a>; the
-<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md">ISA RO-Crate Profile</a> provides the structural Investigation → Study → Assay hierarchy with experimental steps
-modelled as <a href="https://bioschemas.org/">Bioschemas</a> <code>LabProcess</code> / <code>LabProtocol</code>; and this profile adds the
-toxicology-specific, ontology-backed requirements on top.</p>
-<p>The extension is additive and reuse-first: each concept is expressed through the most specific applicable
-<a href="https://schema.org/">Schema.org</a> or <a href="https://bioschemas.org/">Bioschemas</a> type, refined where necessary by an existing
-ontology term: a step by the protocol type of the record it executes, a test-system source by its <code>sampleType</code>. Test/control chemicals are
-<a href="https://bioschemas.org/MolecularEntity">bioschemas.org/MolecularEntity</a> instances; the test system is a
-<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> carrying <code>sampleType</code> — a cell line, primary cells, an organoid or other 3D model, a tissue
-or organ fragment, a sub-cellular fraction — of which cell lines and primary cells carry requirements of their own
-here; and the experimental workflow is a chain of
-<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> steps discriminated as <code>TestSystemPreparation</code>, <code>Exposure</code>, <code>EndpointReadout</code>, and <code>DataAnalysis</code>.</p>
-<p>Requirement levels use <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> keywords, as recommended by the RO-Crate 1.2
-profile conventions: MUST (required for conformance), SHOULD (recommended; absence is reported as a warning), and
-MAY (optional). The shapes are open-world: a property this profile does not name is neither checked nor
-forbidden (no shape declares <code>sh:closed</code>), so a crate may carry further metadata without affecting conformance.
-The figure below is the model of an <em>in vitro</em> NAM study in terms of this profile's entity types: box colour gives
-the type, line style the relationship. Each material is a Bioschemas <code>Sample</code>, each step a <code>LabProcess</code> following a
-<code>LabProtocol</code>, and the chemicals a <code>MolecularEntity</code>.</p>
+<p><a href="https://www.researchobject.org/ro-crate/">RO-Crate</a> provides a portable data package expressed in
+<a href="https://schema.org/">Schema.org</a> terms. The <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md">ISA profile</a> defines the Investigation → Study → Assay
+hierarchy and represents experimental steps as <a href="https://bioschemas.org/">Bioschemas</a> <code>LabProcess</code> and
+<code>LabProtocol</code> entities. This profile specifies the toxicological requirements and the ontology terms used to
+express them.</p>
+<p>Chemical entities are represented as <a href="https://bioschemas.org/MolecularEntity">MolecularEntity</a> instances,
+biological materials as <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> entities classified by <code>sampleType</code>, and experimental steps as
+<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> entities classified by the <code>intendedUse</code> of the protocol record they execute:
+<code>TestSystemPreparation</code>, <code>Exposure</code>, <code>EndpointReadout</code> or <code>DataAnalysis</code>. A step whose protocol record declares
+none of these four terms is validated against the base and ISA layers only; a term outside this set is reported
+as a warning.</p>
+<p>Requirement levels follow <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>. MUST denotes a requirement for
+conformance, SHOULD a recommendation whose absence is reported as a warning, and MAY an optional feature. No
+shape declares <code>sh:closed</code>; properties this profile does not name are therefore neither validated nor
+prohibited.</p>
 <p><img alt="The ISA-Tox model of an in vitro NAM study: source cells are prepared into a test system, exposed, read out and
 analysed, each step following a protocol record and producing the next material or
 file." src="figures/isa-tox-model.svg" /></p>
-<blockquote>
-<p><strong>How the reference builder encodes this.</strong> The tables below give the canonical
-property names and expected types (what the SHACL shapes check). The
-<a href="https://github.com/johannehouweling/vitro-crate"><code>vitro-crate</code></a> builder emits them through compact JSON-LD
-aliases defined in the crate's <code>@context</code>, all RDF-identical to the canonical predicates:</p>
-<ul>
-<li><code>@type</code> is the bare token (<code>Sample</code>, <code>LabProcess</code>, <code>LabProtocol</code>,
-  <code>PropertyValue</code>, …); the <code>@context</code> expands it to the Bioschemas/schema.org
-  IRI named in the tables.</li>
-<li>process parameters appear under <code>parameter</code> (→ <code>schema:additionalProperty</code>),
-  inputs under <code>input</code> (→ <code>schema:object</code>), outputs under <code>output</code>
-  (→ <code>schema:result</code>), and <code>derivesFrom</code> expands to <code>schema:isBasedOn</code>.</li>
-<li>the AOP links are written as <code>aop</code> on a Study and <code>keyEvent</code> on an Assay, both expanding to
-  <code>schema:mentions</code>, and a compound's hashed structure as <code>inchikey</code> (→ <code>schema:inChIKey</code>).</li>
-<li>each <code>parameter</code> is a <code>PropertyValue</code> <strong>node</strong> with a deterministic <code>@id</code>, a
-  <code>propertyID</code> IRI and optional <code>unitText</code> — never an inline literal (the
-  LabProcess shapes use <code>sh:class schema:PropertyValue</code>).</li>
-<li>a derived <code>Sample</code>'s <code>derivesFrom</code> links the Sample it was made from; only cultured
-  material is constrained: at most one parent Sample, or two or more for a co-culture.</li>
-</ul>
-<p>The four LabProcess shapes are <strong>selected by the <code>intendedUse</code> of the protocol record a
-step executes</strong>: a term of the test system preparation types set, treatment
-protocol EFO:0003969, assay protocol BAO:0000523, data transformation OBI:0200000. A
-<code>LabProcess</code> whose record carries none of these is targeted by no tox shape and is
-checked only by the base + ISA layers, and a type outside the list is a warning.</p>
-</blockquote>
 <h2 id="conformance">Conformance</h2>
 <p>A crate following this profile declares conformance using the <strong>RO-Crate 1.2</strong> convention: the
 <em>RO-Crate Metadata Descriptor</em>'s <code>conformsTo</code> carries only the single base-specification URI, while the
@@ -123,9 +92,8 @@ also declared as a <code>Profile</code> contextual entity.</p>
   ]
 }
 </code></pre>
-<p>The ISA layer is declared with the IRI the profile actually extends (see
-<code>profiles/shapes/tox/profile.ttl</code>, <code>prof:isProfileOf</code>); a stable <code>w3id.org/ro/crate/isa/…</code>
-permalink is not yet registered. The referenced profiles are declared as contextual entities:</p>
+<p>No <code>w3id.org/ro/crate/isa/…</code> permalink has been registered; the ISA layer is therefore identified by the IRI
+the profile extends. Both referenced profiles are declared as contextual entities:</p>
 <pre><code class="language-json">{
   &quot;@id&quot;: &quot;https://github.com/nfdi4plants/isa-ro-crate-profile&quot;,
   &quot;@type&quot;: [&quot;CreativeWork&quot;, &quot;Profile&quot;],
@@ -139,32 +107,26 @@ permalink is not yet registered. The referenced profiles are declared as context
 }
 </code></pre>
 <blockquote>
-<p><strong>Note — RO-Crate 1.2 placement.</strong> RO-Crate <strong>1.2</strong> recommends declaring the profiles a crate targets on the
+<p><strong>Note on RO-Crate 1.2 placement:</strong> RO-Crate <strong>1.2</strong> recommends declaring the profiles a crate targets on the
 <em>Root Data Entity</em> (<code>./</code>) and reserving the <em>Metadata Descriptor</em>'s <code>conformsTo</code> for a single base-specification
 value — which this profile follows.</p>
 </blockquote>
 <p>A machine-readable <a href="https://www.researchobject.org/ro-crate/specification/1.2/profiles.html#profile-crate">Profile Crate</a> bundling this
 description with the SHACL shapes MAY additionally be published at the profile URI; this is planned but not yet provided.</p>
 <h2 id="requirements">Requirements</h2>
-<p>A crate MUST include at least one Exposure that one of its Studies or Assays is about: it
-is not <em>in vitro</em> toxicology if nothing is exposed to a chemical. The check targets the Root
-Data Entity, so it holds even for a crate that contains nothing else. Each Exposure's
-protocol then names its compounds (see <a href="#labprocess---exposure">LabProcess - Exposure</a>).</p>
+<p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays. A crate that
+records no exposure of a test system to a chemical does not describe an <em>in vitro</em> toxicological experiment; the
+requirement therefore applies irrespective of what else the crate contains.</p>
 <h3 id="study-adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study addresses one Adverse Outcome Pathway, referenced via
-<code>schema:mentions</code> at the Study level; each of its assays annotates the one Key Event it measures
-(<a href="#assay---key-event">Assay - Key Event</a>). The referenced node is the AOP-Wiki entity itself: <code>@id</code> is its
-identifiers.org IRI as used in AOP-Wiki RDF (<code>https://identifiers.org/aop/&lt;id&gt;</code>), typed <code>AdverseOutcomePathway</code>
-(<a href="http://aopkb.org/aop_ontology#AdverseOutcomePathway">AOPO</a>, the ontology AOP-Wiki RDF itself uses) and
-<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>, with AOP-Wiki as its term set and the wiki page as <code>url</code>. A crate MAY carry the
-surrounding AOP-Wiki subgraph — Key Events (<code>https://identifiers.org/aop.events/&lt;id&gt;</code>) and their
-<code>KeyEventRelationship</code> nodes (<code>https://identifiers.org/aop.relationships/&lt;id&gt;</code>), cross-linked by <code>upstream_event</code> /
-<code>downstream_event</code> — so the pathway reads without a network call.</p>
-<p>The adverse outcome the study is ultimately about is reached through the pathway, via its <code>has_adverse_outcome</code>,
-rather than named again on the Study: an adverse outcome occurs in more than one pathway, so the pathway is the more
-specific statement and the one the assays' Key Events are steps of.</p>
-<p>The rows below are the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>'s own, repeated so this profile's requirement levels can be read
-in one place; <code>mentions</code> is this profile's addition.</p>
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study addresses one Adverse Outcome Pathway via <code>schema:mentions</code>;
+its assays annotate the Key Events (<a href="#assay---key-event">Assay - Key Event</a>). The referenced node is the AOP-Wiki
+entity: <code>@id</code> is <code>https://identifiers.org/aop/&lt;id&gt;</code>, typed <code>AdverseOutcomePathway</code>
+(<a href="http://aopkb.org/aop_ontology#AdverseOutcomePathway">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>, with the wiki
+page as <code>url</code>. A crate MAY carry the surrounding subgraph: Key Events (<code>aop.events/&lt;id&gt;</code>) and
+<code>KeyEventRelationship</code> nodes (<code>aop.relationships/&lt;id&gt;</code>) cross-linked by <code>upstream_event</code> and <code>downstream_event</code>.
+The adverse outcome is reached through the pathway's <code>has_adverse_outcome</code>, not named on the Study.</p>
+<p>The following rows are those of the ISA Study, reproduced with the requirement levels this profile assigns.
+<code>mentions</code> is introduced by this profile.</p>
 <table>
 <thead>
 <tr>
@@ -249,9 +211,9 @@ in one place; <code>mentions</code> is this profile's addition.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected identifier <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue">PropertyValue</a> items.</strong> Where a study's <code>citation</code> carries its publication's
-identifiers, each is a PropertyValue whose <code>propertyID</code> fixes which identifier it is. A shape checks the <code>propertyID</code>
-of each.</p>
+<p><strong>Expected identifier <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue">PropertyValue</a> items:</strong> Where a study's <code>citation</code> carries its publication's
+identifiers, each identifier is a PropertyValue whose <code>propertyID</code> declares the identifier scheme. The
+<code>propertyID</code> of each is validated.</p>
 <table>
 <thead>
 <tr>
@@ -274,17 +236,12 @@ of each.</p>
 </tbody>
 </table>
 <h3 id="assay-key-event">Assay - Key Event</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint, annotated with the AOP-Wiki Key Event it
-reads out via <code>schema:mentions</code> — the level below the Study's AOP, so a reader can tell which step of the pathway
-each assay covers. The referenced node is the AOP-Wiki Key Event itself: <code>@id</code> is its identifiers.org IRI as used in
-AOP-Wiki RDF (<code>https://identifiers.org/aop.events/&lt;id&gt;</code>), typed <code>KeyEvent</code>
-(<a href="http://aopkb.org/aop_ontology#KeyEvent">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>, with the wiki page as <code>url</code>.</p>
-<p>What the assay measures is named in <a href="https://bioassayontology.org/">BAO</a> terms, the vocabulary this profile uses
-throughout for assay description: at this level through <code>measurementMethod</code> and <code>measurementTechnique</code>, and in more
-detail on the step that reads the endpoint, whose parameters carry the detection instrument, measured entity and
-endpoint as BAO terms (see <a href="#labprocess---endpoint-readout">LabProcess - Endpoint Readout</a>).</p>
-<p>The rows below are the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>'s own, repeated so this profile's requirement levels can be read
-in one place; <code>mentions</code> is this profile's addition.</p>
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and names the AOP-Wiki Key Event it
+reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://identifiers.org/aop.events/&lt;id&gt;</code>, typed <code>KeyEvent</code>
+(<a href="http://aopkb.org/aop_ontology#KeyEvent">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>. What it measures is named in
+<a href="https://bioassayontology.org/">BAO</a> terms through <code>measurementMethod</code> and <code>measurementTechnique</code>.</p>
+<p>The following rows are those of the ISA Assay, reproduced with the requirement levels this profile assigns.
+<code>mentions</code> is introduced by this profile.</p>
 <table>
 <thead>
 <tr>
@@ -370,16 +327,12 @@ in one place; <code>mentions</code> is this profile's addition.</p>
 </tbody>
 </table>
 <h3 id="molecularentity-test-and-control-chemicals">MolecularEntity - Test and Control Chemicals</h3>
-<p>The test and control chemicals are modelled as <a href="https://bioschemas.org/MolecularEntity">bioschemas.org/MolecularEntity</a>
-instances. A <code>MolecularEntity</code> is one defined molecule, and it is the type that carries the structure and identity
-properties this profile asks for — <code>inChIKey</code>, <code>smiles</code>, <code>inChI</code>, <code>molecularFormula</code> — so a reader can tell which
-compound was tested and look it up in <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a> or
-<a href="https://comptox.epa.gov/dashboard/">CompTox</a>. Schema.org's broader
-<a href="https://schema.org/ChemicalSubstance"><code>ChemicalSubstance</code></a> covers a portion of matter of constant composition — a
-mixture or preparation as readily as a pure compound — and defines no structure property at all, so a compound typed
-that way cannot be matched by structure. A test item that is genuinely a mixture has no modelling in this version.
-Concentration is <strong>not</strong> a property of the compound — it is carried per well by the
-<a href="#labprocess---exposure">Exposure</a>'s condition table (CSVW), so there is no per-concentration chemical Sample.</p>
+<p>Test and control chemicals are represented as <a href="https://bioschemas.org/MolecularEntity">MolecularEntity</a>
+instances, each denoting a single defined molecule and bearing the structural properties specified below.
+Schema.org's <a href="https://schema.org/ChemicalSubstance"><code>ChemicalSubstance</code></a> defines no structural property and is
+not used. Test items that are mixtures are outside the scope of this version.</p>
+<p>Concentration is <strong>not</strong> a property of the compound. It is recorded per well in the
+<a href="#labprocess---exposure">Exposure</a>'s condition table.</p>
 <table>
 <thead>
 <tr>
@@ -447,21 +400,17 @@ Concentration is <strong>not</strong> a property of the compound — it is carri
 </tbody>
 </table>
 <h3 id="sample-source-cells">Sample - Source Cells</h3>
-<p>Is based on the Bioschemas <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a> type (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">ISA Sample</a>).
-The cells or material a <a href="#labprocess---test-system-preparation">Test System Preparation</a> starts from — the test
-system in the sense IUCLID OHT 201 gives it. One Sample carries a categorical annotation via <code>sampleType</code>
-(a <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>) saying which kind it is: a cell line, primary cells, an organoid or other 3D
-model, a tissue or organ fragment, a sub-cellular fraction, a whole organism. Cell lines and primary cells add
-requirements of their own below; any other kind is described by this section alone, under its own term. A Sample a
-preparation consumes is source cells whatever it states, so one with no <code>sampleType</code> is still reported. The labels
-<code>"CellLine"</code> / <code>"PrimaryCell"</code> older crates carry in <code>additionalType</code> are aliases.</p>
-<p>A test system is dual-typed <code>Sample</code> and <a href="https://bioschemas.org/BioSample">BioSample</a>, which is a Bioschemas subtype
-of <code>Sample</code>: the inherited ISA requirements and every shape here keep matching on <code>Sample</code>, while a BioSample-aware
-consumer recognises the material and can read <code>cellType</code>, <code>anatomicalStructure</code> and <code>sex</code> directly. Those three are
-BioSample's own properties, pending integration into Schema.org. They state the same facts this profile also carries
-as Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a> items with their ontology terms, and it is the
-Characteristic that the shapes check — so a crate stays conformant whether or not it carries the BioSample
-properties as well.</p>
+<p>Based on the Bioschemas <a href="https://bioschemas.org/Sample">Sample</a> type (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">ISA Sample</a>). Source cells are
+the material from which a <a href="#labprocess---test-system-preparation">Test System Preparation</a> proceeds. The
+<code>sampleType</code> property classifies the material. Cell lines and
+primary cells carry the additional requirements specified below; materials of any other kind are governed by this
+section alone. A Sample consumed by a preparation step is source cells irrespective of its declared <code>sampleType</code>.
+The values <code>"CellLine"</code> and <code>"PrimaryCell"</code> in <code>additionalType</code> are retained as aliases.</p>
+<p>Samples are typed as both <code>Sample</code> and <a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of
+<code>Sample</code>. Validation is performed against <code>Sample</code>; a BioSample-aware consumer may read <code>cellType</code>,
+<code>anatomicalStructure</code> and <code>sex</code> directly. These three properties express the same assertions as the corresponding
+Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a> items against which conformance is determined,
+and are therefore optional.</p>
 <table>
 <thead>
 <tr>
@@ -516,9 +465,9 @@ properties as well.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>sampleType</code> terms.</strong> Each is a <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a> whose <code>@id</code> dereferences to the term.
-The term is what each section below keys on, so it decides which requirements apply to a Sample. A kind with no term
-in this table is reported until one is added, so that a typo in a <code>sampleType</code> is still caught.</p>
+<p><strong>Expected <code>sampleType</code> terms:</strong> Each is a <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a> whose <code>@id</code> dereferences to the term.
+The sections below are selected by this term. A material whose kind has no corresponding term in this table is
+reported, which also detects a malformed <code>sampleType</code>.</p>
 <table>
 <thead>
 <tr>
@@ -692,9 +641,9 @@ isolated as instead.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>additionalProperty</code> items.</strong> Each is a Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a>
-(<code>additionalType</code> <code>"CharacteristicValue"</code>). Only the cell type is checked by a shape. A donor's sex is the
-BioSample <code>sex</code> property in the table above, not a characteristic.</p>
+<p><strong>Expected <code>additionalProperty</code> items:</strong> Each is a Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a>
+(<code>additionalType</code> <code>"CharacteristicValue"</code>). Only the cell type is validated. Donor sex is expressed by the
+BioSample <code>sex</code> property in the table above and not as a characteristic.</p>
 <table>
 <thead>
 <tr>
@@ -709,19 +658,19 @@ BioSample <code>sex</code> property in the table above, not a characteristic.</p
 <td>cell type</td>
 <td>SHOULD</td>
 <td><code>http://www.ebi.ac.uk/efo/EFO_0000324</code></td>
-<td>Value e.g. a CL term. The only item a shape checks. Also statable as <code>cellType</code>.</td>
+<td>A CL term. The only item in this table that is validated. Also expressible as <code>cellType</code>.</td>
 </tr>
 <tr>
 <td>Organ</td>
 <td>SHOULD</td>
 <td><code>http://purl.obolibrary.org/obo/UBERON_0000062</code></td>
-<td>Value e.g. an UBERON term. Also statable as <code>anatomicalStructure</code>.</td>
+<td>An UBERON term. Also expressible as <code>anatomicalStructure</code>.</td>
 </tr>
 <tr>
 <td>Tissue</td>
 <td>SHOULD</td>
 <td><code>http://purl.obolibrary.org/obo/UBERON_0000479</code></td>
-<td>Value e.g. an UBERON term. Also statable as <code>anatomicalStructure</code>.</td>
+<td>An UBERON term. Also expressible as <code>anatomicalStructure</code>.</td>
 </tr>
 <tr>
 <td>passage</td>
@@ -737,21 +686,21 @@ BioSample <code>sex</code> property in the table above, not a characteristic.</p
 </tr>
 <tr>
 <td>supplier</td>
-<td>SHOULD if commercial</td>
+<td>SHOULD</td>
 <td><code>http://purl.obolibrary.org/obo/NCIT_C90473</code></td>
-<td></td>
+<td>For commercially sourced material.</td>
 </tr>
 <tr>
 <td>catalogue number</td>
-<td>SHOULD if commercial</td>
+<td>SHOULD</td>
 <td><code>http://purl.obolibrary.org/obo/NCIT_C99286</code></td>
-<td></td>
+<td>For commercially sourced material.</td>
 </tr>
 <tr>
 <td>lot number</td>
-<td>SHOULD if commercial</td>
+<td>SHOULD</td>
 <td><code>http://purl.obolibrary.org/obo/NCIT_C70848</code></td>
-<td>The lot, not the catalogue number, fixes the donor.</td>
+<td>For commercially sourced material. The lot, not the catalogue number, identifies the donor.</td>
 </tr>
 <tr>
 <td>donor code</td>
@@ -779,15 +728,9 @@ BioSample <code>sex</code> property in the table above, not a characteristic.</p
 </tr>
 </tbody>
 </table>
-<p>Donor consent or ethics approval MAY be stated at <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">Study</a> level, not on the Sample.</p>
-<p><strong>Modelling rules.</strong></p>
-<ul>
-<li>A donor pool is <strong>one</strong> primary-cell Sample carrying the number of donors.</li>
-<li>Donors cultured separately are one Sample each.</li>
-</ul>
 <h3 id="sample-test-system">Sample - Test System</h3>
-<p>The material a <a href="#labprocess---test-system-preparation">Test System Preparation</a> produces: cultured cells, derived
-from the <a href="#sample---source-cells">Source Cells</a> they were grown from. Its <code>sampleType</code> is "cell culture"
+<p>The test system a <a href="#labprocess---test-system-preparation">Test System Preparation</a> produces from its
+<a href="#sample---source-cells">Source Cells</a>. Its <code>sampleType</code> is "cell culture"
 → <a href="http://purl.obolibrary.org/obo/OBI_0001876">OBI:0001876</a>.</p>
 <table>
 <thead>
@@ -837,7 +780,7 @@ from the <a href="#sample---source-cells">Source Cells</a> they were grown from.
 </tr>
 </tbody>
 </table>
-<p><strong>Modelling rules.</strong></p>
+<p><strong>Modelling rules:</strong></p>
 <ul>
 <li>A test system derives from <strong>at most one</strong> parent Sample. Culture each source separately, or type material grown
   from several sources as a <a href="#test-system---co-culture">co-culture</a>.</li>
@@ -894,19 +837,20 @@ or more source cells. One source grown alone is an ordinary test system, not a c
 </tbody>
 </table>
 <h3 id="sample-exposed-test-system">Sample - Exposed Test System</h3>
-<p>The material an <a href="#labprocess---exposure">Exposure</a> produces: the test system after the chemical was applied. It
-carries the same requirements as the <a href="#sample---test-system">Test System</a> it derives from — same type, same
-<code>sampleType</code> "cell culture", <code>isBasedOn</code> the test system it was exposed from — so it has no table of its own. What
-makes it the exposed material is stated on the step, not on the Sample: an Exposure MUST have the test system as
-<code>schema:object</code> and the exposed material as <code>schema:result</code>. Following <code>isBasedOn</code> back from it therefore walks the
-whole chain: exposed test system → test system → source cells.</p>
+<p>The test system following application of the chemical. It carries the requirements of the
+<a href="#sample---test-system">Test System</a> and declares <code>isBasedOn</code> the test system from which it was exposed, and so
+has no table of its own. The exposed material is identified by the step rather than by the Sample: an Exposure
+MUST declare the test system as <code>schema:object</code> and the exposed material as <code>schema:result</code>. Traversing
+<code>isBasedOn</code> in reverse yields the derivation chain: exposed test system → test system → source cells.</p>
 <h3 id="labprocess-test-system-preparation">LabProcess - Test System Preparation</h3>
-<p>Is based on the Bioschemas DRAFT <a href="https://bioschemas.org/LabProcess">bioschemas.org/LabProcess</a> type
-(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">ISA LabProcess</a>), typed by its protocol record's <code>intendedUse</code>, a term of the test system preparation types set, to represent
-preparation of the biological model from its source cells, such as its maintenance in culture. A test system may be
-prepared in several steps, each typed by what it does. A stably modified line is the source itself, not a step.</p>
-<p>The set is a <a href="https://schema.org/DefinedTermSet">DefinedTermSet</a>, <code>https://w3id.org/ro/crate/isa-tox/1.0/preparation-types</code>, published with this
-profile; the term states it with <code>inDefinedTermSet</code>:</p>
+<p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that prepares the biological model from its source cells, including its
+maintenance in culture, typed by the <code>intendedUse</code> of its protocol record, a term of the preparation types set
+below. A test system may be prepared in several steps. A stably modified line constitutes the source material
+itself and is not represented as a preparation step.</p>
+<p>The three terms below form a <a href="https://schema.org/DefinedTermSet">DefinedTermSet</a> identified by
+<code>https://w3id.org/ro/crate/isa-tox/1.0/preparation-types</code> and defined in this profile's vocabulary,
+<code>shapes/ontology.ttl</code>. A step is recognised as a test system preparation when the <code>intendedUse</code> of its protocol
+record declares that set with <code>inDefinedTermSet</code>:</p>
 <table>
 <thead>
 <tr>
@@ -983,8 +927,8 @@ profile; the term states it with <code>inDefinedTermSet</code>:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>parameterValue</code> items.</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
-(<code>additionalType</code> <code>"ParameterValue"</code>). The profile requires at least one <code>parameterValue</code>; the following are recommended
+<p><strong>Expected <code>parameterValue</code> items:</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
+(<code>additionalType</code> <code>"ParameterValue"</code>). At least one <code>parameterValue</code> is required. The following are recommended
 for this step:</p>
 <table>
 <thead>
@@ -1003,20 +947,12 @@ for this step:</p>
 </tbody>
 </table>
 <h3 id="labprocess-exposure">LabProcess - Exposure</h3>
-<p>Is based on the Bioschemas DRAFT <a href="https://bioschemas.org/LabProcess">bioschemas.org/LabProcess</a> type
-(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">ISA LabProcess</a>), typed by its protocol record's <code>intendedUse</code>, treatment protocol (EFO:0003969), to represent exposing the cell-based test system to
-the chemical(s). It takes the cultured cell <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> as its <code>object</code>, executes a protocol record naming
-the compounds it applied, and emits the exposed cell <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a>(s) as its <code>result</code>. The experimental design
-is a run-specific condition table (CSVW): a data file <code>about</code> those exposed Samples, in which each row records a single
-well (cell line, compound, concentration, exposure duration).</p>
-<blockquote>
-<p><strong>Where the compound goes.</strong> The <a href="#molecularentity---chemical">MolecularEntity</a> compound is <strong>not</strong> a process
-<code>object</code>: the inherited ISA <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> shape restricts <code>schema:object</code> (and <code>schema:result</code>)
-to <code>File</code>/<code>Sample</code>/<code>BioSample</code>, so a <code>MolecularEntity</code> there fails validation. The compound is a <code>reagent</code> of the
-Exposure's <a href="#labprotocol---protocol-record">protocol record</a>, which MUST name at least one. The procedural SOPs name no
-compound and are what the record <code>isBasedOn</code>, so the assay stays executable with other chemicals: a re-run needs a new
-record and condition table and the same SOPs.</p>
-</blockquote>
+<p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that exposes the test system to one or more chemicals, typed by the
+<code>intendedUse</code> of its protocol record, treatment protocol (EFO:0003969). It declares the cultured
+<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> as <code>object</code>, executes a protocol record naming the compounds applied, and declares the
+exposed <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a>(s) as <code>result</code>.</p>
+<p>The experimental design is recorded in a condition table (CSVW): a data file <code>about</code> those exposed Samples, with
+one row per well giving cell line, compound, concentration and exposure duration.</p>
 <table>
 <thead>
 <tr>
@@ -1071,8 +1007,8 @@ record and condition table and the same SOPs.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>parameterValue</code> items.</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
-(<code>additionalType</code> <code>"ParameterValue"</code>). The profile requires at least one <code>parameterValue</code>; the following are recommended
+<p><strong>Expected <code>parameterValue</code> items:</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
+(<code>additionalType</code> <code>"ParameterValue"</code>). At least one <code>parameterValue</code> is required. The following are recommended
 for this step:</p>
 <table>
 <thead>
@@ -1101,8 +1037,8 @@ for this step:</p>
 </tbody>
 </table>
 <h3 id="labprocess-endpoint-readout">LabProcess - Endpoint Readout</h3>
-<p>Is based on the Bioschemas DRAFT <a href="https://bioschemas.org/LabProcess">bioschemas.org/LabProcess</a> type
-(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">ISA LabProcess</a>), typed by its protocol record's <code>intendedUse</code>, assay protocol (BAO:0000523), to represent measurement of the assay endpoint.</p>
+<p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that measures the assay endpoint, typed by the <code>intendedUse</code> of its protocol
+record, assay protocol (BAO:0000523).</p>
 <table>
 <thead>
 <tr>
@@ -1157,8 +1093,8 @@ for this step:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>parameterValue</code> items.</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
-(<code>additionalType</code> <code>"ParameterValue"</code>). The profile requires at least one <code>parameterValue</code>; the following are recommended
+<p><strong>Expected <code>parameterValue</code> items:</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
+(<code>additionalType</code> <code>"ParameterValue"</code>). At least one <code>parameterValue</code> is required. The following are recommended
 for this step:</p>
 <table>
 <thead>
@@ -1207,16 +1143,14 @@ for this step:</p>
 </tbody>
 </table>
 <blockquote>
-<p><strong>Note.</strong> The <code>propertyID</code> IRIs above record exactly what the reference builder emits and are not yet normalised to a
-single resolver; their curation and the mechanism that scores these parameters against the OECD / community reporting
-standards are described in <a href="../mit/docs/MIT_METADATA_WIRING.md"><code>../mit/docs/MIT_METADATA_WIRING.md</code></a>.</p>
+<p><strong>Note:</strong> <code>propertyID</code> IRIs are given in each ontology's native canonical form (OBO Foundry PURLs, EFO under
+<code>www.ebi.ac.uk/efo/</code>, BAO under <code>www.bioassayontology.org/bao#</code>) rather than routed through a single resolver.</p>
 </blockquote>
 <h3 id="labprocess-data-analysis">LabProcess - Data Analysis</h3>
-<p>Is based on the Bioschemas DRAFT <a href="https://bioschemas.org/LabProcess">bioschemas.org/LabProcess</a> type
-(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">ISA LabProcess</a>), typed by its protocol record's <code>intendedUse</code>, data transformation (OBI:0200000), to represent the processing pipeline that turns the
-raw endpoint measurements into the reported results. It consumes the <a href="#labprocess---endpoint-readout">Endpoint Readout</a>'s
-raw-data File(s) and emits the processed-data File(s) along the derivation graph. It corresponds to the <em>Analysis and
-Statistics</em> module of the Minimal Information Table.</p>
+<p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that derives the reported results from the raw measurements, typed by the
+<code>intendedUse</code> of its protocol record, data transformation (OBI:0200000). It consumes the raw-data File(s)
+produced by the <a href="#labprocess---endpoint-readout">Endpoint Readout</a> and declares the processed-data File(s) as its
+result. It corresponds to the <em>Analysis and Statistics</em> module of the Minimal Information Table.</p>
 <table>
 <thead>
 <tr>
@@ -1271,9 +1205,9 @@ Statistics</em> module of the Minimal Information Table.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Expected <code>parameterValue</code> items.</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
-(<code>additionalType</code> <code>"ParameterValue"</code>). The profile requires at least one <code>parameterValue</code>; the following are recommended
-for this step (drawn from OHT 201's <em>Data &amp; Analysis</em> module):</p>
+<p><strong>Expected <code>parameterValue</code> items:</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
+(<code>additionalType</code> <code>"ParameterValue"</code>). At least one <code>parameterValue</code> is required. The following, drawn from
+OHT 201's <em>Data &amp; Analysis</em> module, are recommended for this step:</p>
 <table>
 <thead>
 <tr>
@@ -1301,12 +1235,12 @@ for this step (drawn from OHT 201's <em>Data &amp; Analysis</em> module):</p>
 </tbody>
 </table>
 <h3 id="labprotocol-protocol-record">LabProtocol - Protocol record</h3>
-<p>Is based on the Bioschemas <a href="https://bioschemas.org/LabProtocol">bioschemas.org/LabProtocol</a> type
-(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprotocol">ISA LabProtocol</a>). Each LabProcess above executes exactly one: a record of the protocol its step
-follows, present whether or not the lab deposited a document for it, because its <code>intendedUse</code> says what kind of step
-it is. A deposited SOP or script stays a <code>File</code> co-typed <code>LabProtocol</code> (the RO-Crate 1.2 multi-type idiom) and is what
-the record is <code>isBasedOn</code>, so one document can serve several steps, each record carrying its own type. ISA-JSON has no
-<code>isBasedOn</code> on a protocol, so that link is lost on conversion to ISA-JSON.</p>
+<p>Based on the Bioschemas <a href="https://bioschemas.org/LabProtocol">LabProtocol</a> type
+(<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprotocol">ISA LabProtocol</a>). Each LabProcess executes exactly one protocol record. The record is present
+whether or not a document was deposited, since its <code>intendedUse</code> determines the type of the step. A deposited
+standard operating procedure is a <code>File</code> additionally typed <code>LabProtocol</code>, referenced by the record through
+<code>isBasedOn</code>; one document may therefore serve several steps. ISA-JSON defines no <code>isBasedOn</code> on a protocol, and
+this reference is consequently lost on conversion.</p>
 <table>
 <thead>
 <tr>
@@ -1394,7 +1328,7 @@ the record is <code>isBasedOn</code>, so one document can serve several steps, e
 </tbody>
 </table>
 <h2 id="example-ro-crate-metadatajson">Example ro-crate-metadata.json</h2>
-<p>A conforming crate types every step by its protocol record's <code>intendedUse</code> and every test-system source by its
-<code>sampleType</code>, as described above, and validates in three passes (base RO-Crate 1.2 → ISA → ISA-Tox).</p>
+<p>A conforming crate types every step by the <code>intendedUse</code> of its protocol record and every source material by its
+<code>sampleType</code>, and validates in three passes: base RO-Crate 1.2, ISA, then ISA-Tox.</p>
 </body>
 </html>
