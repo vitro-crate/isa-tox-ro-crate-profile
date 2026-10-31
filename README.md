@@ -15,7 +15,7 @@ experimental step types, and ships SHACL shapes that check them.
 
 ## Licence
 
-Specification text [CC BY 4.0](LICENSE); SHACL shapes [MIT](1.0/shapes/LICENSE).
+Specification text [CC BY 4.0](LICENSE). The SHACL shapes live in [vitro-crate](https://github.com/johannehouweling/vitro-crate/tree/main/profiles/shapes/tox) under [MIT](https://github.com/johannehouweling/vitro-crate/blob/main/LICENSE).
 
 ## Contributing
 

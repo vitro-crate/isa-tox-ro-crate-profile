@@ -58,11 +58,16 @@ hierarchy and represents experimental steps as <a href="https://bioschemas.org/"
 <code>LabProtocol</code> entities. This profile specifies the toxicological requirements and the ontology terms used to
 express them.</p>
 <p>Chemical entities are represented as <a href="https://bioschemas.org/MolecularEntity">MolecularEntity</a> instances,
-biological materials as <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> entities classified by <code>sampleType</code>, and experimental steps as
+biological materials as <a href="https://bioschemas.org/BioSample">BioSample</a> entities, a Bioschemas subtype of
+<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a>, classified by <code>sampleType</code>, and experimental steps as
 <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> entities classified by the <code>intendedUse</code> of the protocol record they execute:
 <code>TestSystemPreparation</code>, <code>Exposure</code>, <code>EndpointReadout</code> or <code>DataAnalysis</code>. A step whose protocol record declares
 none of these four terms is validated against the base and ISA layers only; a term outside this set is reported
 as a warning.</p>
+<p>The entity types align with the six modules of the Minimum Information Table for the Safety of Engineered
+Nanomaterials (<a href="https://fairsharing.org/5228">MIT Nanosafety</a>, Elberskirch et al.): general information with the Investigation, Study and Assay;
+material details with the MolecularEntity; biological model specifics with the Samples; and exposure conditions,
+endpoint readouts, and analysis and statistics with the four step types.</p>
 <p>Requirement levels follow <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
 <p><img alt="The ISA-Tox model of an in vitro NAM study: source cells are prepared into a test system, exposed, read out and
 analysed, each step following a protocol record and producing the next material or
@@ -343,7 +348,7 @@ not used. Test items that are mixtures are outside the scope of this version.</p
 <td>@id</td>
 <td>MUST</td>
 <td>Text or URL</td>
-<td>SHOULD be an absolute, resolvable compound IRI — a <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>, <a href="https://comptox.epa.gov/dashboard/">CompTox</a> or CompoundWiki entry. A crate-local identifier (<code>#iopanoic-acid</code>) is allowed, and is the only option for a coded or proprietary test item with no public record; the compound's identity is carried by <code>inChIKey</code> and <code>identifier</code> either way.</td>
+<td>SHOULD be an absolute, resolvable compound IRI — a <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>, <a href="https://comptox.epa.gov/dashboard/">CompTox</a> or <a href="https://compoundcloud.wikibase.cloud/">CompoundWiki</a> entry (<code>https://compoundcloud.wikibase.cloud/entity/Q&lt;n&gt;</code>). A crate-local identifier (<code>#iopanoic-acid</code>) is allowed, and is the only option for a coded or proprietary test item with no public record; the compound's identity is carried by <code>inChIKey</code> and <code>identifier</code> either way.</td>
 </tr>
 <tr>
 <td>@type</td>
@@ -361,7 +366,7 @@ not used. Test items that are mixtures are outside the scope of this version.</p
 <td>identifier</td>
 <td>SHOULD</td>
 <td>Text, URL or <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue">schema.org/PropertyValue</a></td>
-<td>A compound identifier (e.g. InChIKey, CAS, PubChem CID), ideally a PropertyValue carrying its scheme, resolving to an authoritative resource.</td>
+<td>A compound identifier (e.g. InChIKey, CAS, PubChem CID, or a <a href="https://compoundcloud.wikibase.cloud/">CompoundWiki</a> <code>Q</code> id), ideally a PropertyValue carrying its scheme, resolving to an authoritative resource.</td>
 </tr>
 <tr>
 <td>inChIKey</td>
@@ -391,7 +396,7 @@ not used. Test items that are mixtures are outside the scope of this version.</p
 <td>url</td>
 <td>MAY</td>
 <td>URL</td>
-<td>Link to an external record, e.g. PubChem, ChEBI or CompoundWiki.</td>
+<td>Link to an external record, e.g. PubChem, ChEBI or <a href="https://compoundcloud.wikibase.cloud/">CompoundWiki</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -677,7 +682,7 @@ BioSample <code>sex</code> property in the table above and not as a characterist
 <tr>
 <td>growth</td>
 <td>SHOULD</td>
-<td><code>http://www.bioassayontology.org/bao#BAO_0002648</code></td>
+<td><code>http://www.ebi.ac.uk/efo/EFO_0000523</code></td>
 <td>The growth or culture conditions.</td>
 </tr>
 <tr>
@@ -840,13 +845,11 @@ MUST declare the test system as <code>schema:object</code> and the exposed mater
 <code>isBasedOn</code> in reverse yields the derivation chain: exposed test system → test system → source cells.</p>
 <h3 id="labprocess-test-system-preparation">LabProcess - Test System Preparation</h3>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that prepares the biological model from its source cells, including its
-maintenance in culture, typed by the <code>intendedUse</code> of its protocol record, a term of the preparation types set
+maintenance in culture, typed by the <code>intendedUse</code> of its protocol record, one of the preparation types
 below. A test system may be prepared in several steps. A stably modified line constitutes the source material
 itself and is not represented as a preparation step.</p>
-<p>The three terms below form a <a href="https://schema.org/DefinedTermSet">DefinedTermSet</a> identified by
-<code>https://w3id.org/ro/crate/isa-tox/1.0/preparation-types</code> and defined in this profile's vocabulary,
-<code>shapes/ontology.ttl</code>. A step is recognised as a test system preparation when the <code>intendedUse</code> of its protocol
-record declares that set with <code>inDefinedTermSet</code>:</p>
+<p>A step is recognised as a test system preparation when the <code>intendedUse</code> of its protocol record is one of these
+terms, reused from EFO, OBI and GO:</p>
 <table>
 <thead>
 <tr>
@@ -1146,7 +1149,7 @@ for this step:</p>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that derives the reported results from the raw measurements, typed by the
 <code>intendedUse</code> of its protocol record, data transformation (OBI:0200000). It consumes the raw-data File(s)
 produced by the <a href="#labprocess---endpoint-readout">Endpoint Readout</a> and declares the processed-data File(s) as its
-result. It corresponds to the <em>Analysis and Statistics</em> module of the Minimal Information Table.</p>
+result. It corresponds to the <em>analysis and statistics</em> module of <a href="https://fairsharing.org/5228">MIT Nanosafety</a>.</p>
 <table>
 <thead>
 <tr>
@@ -1203,7 +1206,7 @@ result. It corresponds to the <em>Analysis and Statistics</em> module of the Min
 </table>
 <p><strong>Expected <code>parameterValue</code> items:</strong> Each is a Parameter <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---parameter">PropertyValue</a>
 (<code>additionalType</code> <code>"ParameterValue"</code>). At least one <code>parameterValue</code> is required. The following, drawn from
-OHT 201's <em>Data &amp; Analysis</em> module, are recommended for this step:</p>
+OECD Harmonised Template 201's <em>Data &amp; Analysis</em> module, are recommended for this step:</p>
 <table>
 <thead>
 <tr>
@@ -1307,7 +1310,7 @@ this reference is consequently lost on conversion.</p>
 <tbody>
 <tr>
 <td>Test System Preparation</td>
-<td>a term of the <a href="#labprocess---test-system-preparation">test system preparation types</a> set</td>
+<td>one of the <a href="#labprocess---test-system-preparation">test system preparation types</a></td>
 </tr>
 <tr>
 <td>Exposure</td>
@@ -1319,12 +1322,12 @@ this reference is consequently lost on conversion.</p>
 </tr>
 <tr>
 <td>Data Analysis</td>
-<td><a href="http://purl.obolibrary.org/obo/OBI_0200000">OBI:0200000</a> <em>data transformation</em>: no protocol-type term exists, so the OBI process class stands in, as ISA's reference dataset BII-I-1 does for extraction</td>
+<td><a href="http://purl.obolibrary.org/obo/OBI_0200000">OBI:0200000</a> <em>data transformation</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="example-ro-crate-metadatajson">Example ro-crate-metadata.json</h2>
-<p>A conforming crate types every step by the <code>intendedUse</code> of its protocol record and every source material by its
-<code>sampleType</code>, and validates in three passes: base RO-Crate 1.2, ISA, then ISA-Tox.</p>
+<p>A conforming crate is one produced by the reference implementation,
+<a href="https://github.com/johannehouweling/vitro-crate">vitro-crate</a>.</p>
 </body>
 </html>
