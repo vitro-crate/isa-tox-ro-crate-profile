@@ -96,7 +96,7 @@
           "@id": "#hasSpecification"
         },
         {
-          "@id": "#hasSHACL"
+          "@id": "#hasShape"
         }
       ]
     },
@@ -124,6 +124,11 @@
       "@id": "https://opensource.org/licenses/MIT",
       "@type": "CreativeWork",
       "name": "MIT License"
+    },
+    {
+      "@id": "https://www.w3.org/TR/shacl/",
+      "@type": "CreativeWork",
+      "name": "Shapes Constraint Language (SHACL)"
     },
     {
       "@id": "https://github.com/nfdi4plants/isa-ro-crate-profile",
@@ -168,7 +173,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/0_molecular_entity.ttl",
       "@type": "File",
       "name": "0 molecular entity",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -177,7 +190,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/10_doi_property_value.ttl",
       "@type": "File",
       "name": "10 doi property value",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -186,7 +207,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/11_pubmed_id_property_value.ttl",
       "@type": "File",
       "name": "11 pubmed id property value",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -195,7 +224,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/12_cultured_sample_lineage.ttl",
       "@type": "File",
       "name": "12 cultured sample lineage",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -204,7 +241,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/13_lab_process_protocol.ttl",
       "@type": "File",
       "name": "13 lab process protocol",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -213,7 +258,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/1_cell_line_sample.ttl",
       "@type": "File",
       "name": "1 cell line sample",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -222,7 +275,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/2_lab_process_test_system_preparation.ttl",
       "@type": "File",
       "name": "2 lab process test system preparation",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -231,7 +292,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/3_lab_process_exposure.ttl",
       "@type": "File",
       "name": "3 lab process exposure",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -240,7 +309,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/4_lab_process_endpoint_readout.ttl",
       "@type": "File",
       "name": "4 lab process endpoint readout",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -249,7 +326,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/5_lab_process_data_analysis.ttl",
       "@type": "File",
       "name": "5 lab process data analysis",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -258,7 +343,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/6_study_aop.ttl",
       "@type": "File",
       "name": "6 study aop",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -267,7 +360,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/7_assay_key_event.ttl",
       "@type": "File",
       "name": "7 assay key event",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -276,7 +377,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/8_condition_table_csvw.ttl",
       "@type": "File",
       "name": "8 condition table csvw",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -285,7 +394,15 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/9_investigation_strict.ttl",
       "@type": "File",
       "name": "9 investigation strict",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
@@ -294,13 +411,21 @@
       "@id": "https://raw.githubusercontent.com/johannehouweling/vitro-crate/main/profiles/shapes/tox/profile.ttl",
       "@type": "File",
       "name": "profile",
-      "encodingFormat": "text/turtle",
+      "encodingFormat": [
+        "text/turtle",
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/874"
+        }
+      ],
+      "conformsTo": {
+        "@id": "https://www.w3.org/TR/shacl/"
+      },
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
       }
     },
     {
-      "@id": "#hasSHACL",
+      "@id": "#hasShape",
       "@type": "ResourceDescriptor",
       "name": "SHACL shapes",
       "hasRole": {

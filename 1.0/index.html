@@ -23,7 +23,7 @@ img { display: block; max-width: 100%; margin: 1.25rem auto; background: #fff;
 <h1 id="isa-tox-ro-crate-profile">ISA-Tox RO-Crate Profile</h1>
 <ul>
 <li>Version: 1.0.0</li>
-<li>Permalink: <a href="https://w3id.org/ro/crate/isa-tox/1.0">https://w3id.org/ro/crate/isa-tox/1.0</a></li>
+<li>Permalink: <a href="https://w3id.org/ro/crate/isa-tox/1.0">https://w3id.org/ro/crate/isa-tox/1.0</a> (registration pending)</li>
 <li>Published at: <a href="https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/">https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/</a></li>
 <li>Licence: this text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; the SHACL shapes MIT</li>
 <li>Profile of: <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md">ISA RO-Crate Profile</a> (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile">https://github.com/nfdi4plants/isa-ro-crate-profile</a>)</li>
@@ -46,7 +46,6 @@ img { display: block; max-width: 100%; margin: 1.25rem auto; background: #fff;
 <li><a href="#labprotocol---protocol-record">LabProtocol - Protocol record</a></li>
 </ul>
 </li>
-<li><a href="#example-ro-crate-metadatajson">Example ro-crate-metadata.json</a></li>
 </ul>
 <h2 id="overview">Overview</h2>
 <p>This profile extends the <a href="https://isa-tools.org/index.html">ISA</a> <a href="https://www.researchobject.org/ro-crate/">RO-Crate</a> profile
@@ -105,19 +104,15 @@ the profile extends. Both referenced profiles are declared as contextual entitie
   &quot;@id&quot;: &quot;https://w3id.org/ro/crate/isa-tox/1.0&quot;,
   &quot;@type&quot;: [&quot;CreativeWork&quot;, &quot;Profile&quot;],
   &quot;name&quot;: &quot;ISA-Tox RO-Crate Profile&quot;,
-  &quot;version&quot;: &quot;0.1.0-draft.1&quot;
+  &quot;version&quot;: &quot;1.0.0&quot;
 }
 </code></pre>
-<blockquote>
-<p><strong>Note on RO-Crate 1.2 placement:</strong> RO-Crate <strong>1.2</strong> recommends declaring the profiles a crate targets on the
-<em>Root Data Entity</em> (<code>./</code>) and reserving the <em>Metadata Descriptor</em>'s <code>conformsTo</code> for a single base-specification
-value — which this profile follows.</p>
-</blockquote>
-<p>A machine-readable <a href="https://www.researchobject.org/ro-crate/specification/1.2/profiles.html#profile-crate">Profile Crate</a> bundling this
-description with the SHACL shapes MAY additionally be published at the profile URI; this is planned but not yet provided.</p>
+<p>The shapes are open-world: a property this profile does not name is neither required nor forbidden.</p>
+<p>The machine-readable <a href="https://www.researchobject.org/ro-crate/specification/1.2/profiles.html#profile-crate">Profile Crate</a> bundling this
+description with the SHACL shapes is published at
+<a href="https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/ro-crate-metadata.json">https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/ro-crate-metadata.json</a>.</p>
 <h2 id="requirements">Requirements</h2>
-<p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays. A crate that
-records no exposure of a test system to a chemical does not describe an <em>in vitro</em> toxicological experiment.</p>
+<p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays.</p>
 <h3 id="study-adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
 <p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study should address one Adverse Outcome Pathway via <code>schema:mentions</code>;
 its assays annotate the Key Events (<a href="#assay---key-event">Assay - Key Event</a>). The referenced node is the AOP-Wiki
@@ -154,7 +149,7 @@ The adverse outcome is reached through the pathway's <code>has_adverse_outcome</
 <td>additionalType</td>
 <td>MUST</td>
 <td>Text or URL</td>
-<td>'Study' or ontology term to identify it as a Study. It is what selects the entity, so no shape can check it.</td>
+<td>'Study' or ontology term to identify it as a Study.</td>
 </tr>
 <tr>
 <td>identifier</td>
@@ -213,8 +208,7 @@ The adverse outcome is reached through the pathway's <code>has_adverse_outcome</
 </tbody>
 </table>
 <p><strong>Expected identifier <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue">PropertyValue</a> items:</strong> Where a study's <code>citation</code> carries its publication's
-identifiers, each identifier is a PropertyValue whose <code>propertyID</code> declares the identifier scheme. The
-<code>propertyID</code> of each is validated.</p>
+identifiers, each identifier is a PropertyValue whose <code>propertyID</code> declares the identifier scheme.</p>
 <table>
 <thead>
 <tr>
@@ -269,7 +263,7 @@ reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://id
 <td>additionalType</td>
 <td>MUST</td>
 <td>Text or URL</td>
-<td>'Assay' or ontology term to identify it as an Assay. It is what selects the entity, so no shape can check it.</td>
+<td>'Assay' or ontology term to identify it as an Assay.</td>
 </tr>
 <tr>
 <td>identifier</td>
@@ -329,9 +323,7 @@ reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://id
 </table>
 <h3 id="molecularentity-test-and-control-chemicals">MolecularEntity - Test and Control Chemicals</h3>
 <p>Test and control chemicals are represented as <a href="https://bioschemas.org/MolecularEntity">MolecularEntity</a>
-instances, each denoting a single defined molecule and bearing the structural properties specified below.
-Schema.org's <a href="https://schema.org/ChemicalSubstance"><code>ChemicalSubstance</code></a> defines no structural property and is
-not used. Test items that are mixtures are outside the scope of this version.</p>
+instances, each denoting a single defined molecule and bearing the structural properties specified below. Test items that are mixtures are outside the scope of this version.</p>
 <p>Concentration is <strong>not</strong> a property of the compound. It is recorded per well in the
 <a href="#labprocess---exposure">Exposure</a>'s condition table.</p>
 <table>
@@ -406,12 +398,11 @@ the material from which a <a href="#labprocess---test-system-preparation">Test S
 <code>sampleType</code> property classifies the material. Cell lines and
 primary cells carry the additional requirements specified below; materials of any other kind are governed by this
 section alone. A Sample consumed by a preparation step is source cells irrespective of its declared <code>sampleType</code>.
-The values <code>"CellLine"</code> and <code>"PrimaryCell"</code> in <code>additionalType</code> are retained as aliases.</p>
+The values <code>"CellLine"</code> and <code>"PrimaryCell"</code> in <code>additionalType</code> are also accepted.</p>
 <p>Samples are typed as both <code>Sample</code> and <a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of
-<code>Sample</code>. Validation is performed against <code>Sample</code>; a BioSample-aware consumer may read <code>cellType</code>,
-<code>anatomicalStructure</code> and <code>sex</code> directly. These three properties express the same assertions as the corresponding
-Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a> items against which conformance is determined,
-and are therefore optional.</p>
+<code>Sample</code>; the requirements below are matched on <code>Sample</code>. The BioSample properties <code>cellType</code>,
+<code>anatomicalStructure</code> and <code>sex</code> state the same assertions as the corresponding
+Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a> items, and are therefore optional.</p>
 <table>
 <thead>
 <tr>
@@ -432,7 +423,7 @@ and are therefore optional.</p>
 <td>@type</td>
 <td>MUST</td>
 <td><a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a></td>
-<td>The array <code>["BioSample", "Sample"]</code>, most specific first. <code>Sample</code> MUST stay in it: every requirement here is matched on that type.</td>
+<td>The array <code>["BioSample", "Sample"]</code>, most specific first; <code>Sample</code> MUST be present.</td>
 </tr>
 <tr>
 <td>sampleType</td>
@@ -467,8 +458,7 @@ and are therefore optional.</p>
 </tbody>
 </table>
 <p><strong>Expected <code>sampleType</code> terms:</strong> Each is a <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a> whose <code>@id</code> dereferences to the term.
-The sections below are selected by this term. A material whose kind has no corresponding term in this table is
-reported, which also detects a malformed <code>sampleType</code>.</p>
+The sections below are selected by this term.</p>
 <table>
 <thead>
 <tr>
@@ -543,7 +533,7 @@ identified by its Cellosaurus accession.</p>
 <td>@type</td>
 <td>MUST</td>
 <td><a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a></td>
-<td>The array <code>["BioSample", "Sample"]</code>, most specific first. <code>Sample</code> MUST stay in it: every requirement here is matched on that type.</td>
+<td>The array <code>["BioSample", "Sample"]</code>, most specific first; <code>Sample</code> MUST be present.</td>
 </tr>
 <tr>
 <td>sampleType</td>
@@ -602,7 +592,7 @@ isolated as instead.</p>
 <td>@type</td>
 <td>MUST</td>
 <td><a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a></td>
-<td>The array <code>["BioSample", "Sample"]</code>, most specific first. <code>Sample</code> MUST stay in it: every requirement here is matched on that type.</td>
+<td>The array <code>["BioSample", "Sample"]</code>, most specific first; <code>Sample</code> MUST be present.</td>
 </tr>
 <tr>
 <td>sampleType</td>
@@ -643,8 +633,8 @@ isolated as instead.</p>
 </tbody>
 </table>
 <p><strong>Expected <code>additionalProperty</code> items:</strong> Each is a Characteristic <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#propertyvalue---characteristic">PropertyValue</a>
-(<code>additionalType</code> <code>"CharacteristicValue"</code>). Only the cell type is validated. Donor sex is expressed by the
-BioSample <code>sex</code> property in the table above and not as a characteristic.</p>
+(<code>additionalType</code> <code>"CharacteristicValue"</code>). Donor sex is expressed by the BioSample <code>sex</code>
+property in the table above, not as a characteristic.</p>
 <table>
 <thead>
 <tr>
@@ -659,7 +649,7 @@ BioSample <code>sex</code> property in the table above and not as a characterist
 <td>cell type</td>
 <td>SHOULD</td>
 <td><code>http://www.ebi.ac.uk/efo/EFO_0000324</code></td>
-<td>A CL term. The only item in this table that is validated. Also expressible as <code>cellType</code>.</td>
+<td>A CL term. Also expressible as <code>cellType</code>.</td>
 </tr>
 <tr>
 <td>Organ</td>
@@ -753,7 +743,7 @@ BioSample <code>sex</code> property in the table above and not as a characterist
 <td>@type</td>
 <td>MUST</td>
 <td><a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a></td>
-<td>The array <code>["BioSample", "Sample"]</code>, most specific first. <code>Sample</code> MUST stay in it: every requirement here is matched on that type.</td>
+<td>The array <code>["BioSample", "Sample"]</code>, most specific first; <code>Sample</code> MUST be present.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -771,7 +761,7 @@ BioSample <code>sex</code> property in the table above and not as a characterist
 <td>sampleType</td>
 <td>MAY</td>
 <td><a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">schema.org/DefinedTerm</a></td>
-<td>"cell culture" → <a href="http://purl.obolibrary.org/obo/OBI_0001876">OBI:0001876</a>. The term is what makes the Sample a test system: without it these requirements do not apply to it.</td>
+<td>"cell culture" → <a href="http://purl.obolibrary.org/obo/OBI_0001876">OBI:0001876</a>.</td>
 </tr>
 <tr>
 <td>isBasedOn</td>
@@ -809,7 +799,7 @@ or more source cells. One source grown alone is an ordinary test system, not a c
 <td>@type</td>
 <td>MUST</td>
 <td><a href="https://bioschemas.org/BioSample">BioSample</a>, a Bioschemas subtype of <a href="https://bioschemas.org/Sample">bioschemas.org/Sample</a></td>
-<td>The array <code>["BioSample", "Sample"]</code>, most specific first. <code>Sample</code> MUST stay in it: every requirement here is matched on that type.</td>
+<td>The array <code>["BioSample", "Sample"]</code>, most specific first; <code>Sample</code> MUST be present.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -833,7 +823,7 @@ or more source cells. One source grown alone is an ordinary test system, not a c
 <td>sampleType</td>
 <td>MAY</td>
 <td><a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">schema.org/DefinedTerm</a></td>
-<td>"co-culture" → <a href="http://purl.obolibrary.org/obo/NCIT_C93168">NCIT:C93168</a>. The term is what makes the Sample a co-culture: without it these requirements do not apply to it.</td>
+<td>"co-culture" → <a href="http://purl.obolibrary.org/obo/NCIT_C93168">NCIT:C93168</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -922,7 +912,7 @@ terms, reused from EFO, OBI and GO:</p>
 <td>executesLabProtocol</td>
 <td>MUST</td>
 <td><a href="#labprotocol---protocol-record">bioschemas.org/LabProtocol</a></td>
-<td>The step's protocol record: exactly one (SHOULD).</td>
+<td>The step's protocol record; exactly one SHOULD be declared.</td>
 </tr>
 </tbody>
 </table>
@@ -984,7 +974,7 @@ one row per well giving cell line, compound, concentration and exposure duration
 <td>object</td>
 <td>MUST</td>
 <td><a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">bioschemas.org/Sample</a> or <a href="https://schema.org/MediaObject">File</a></td>
-<td>The input cell sample(s) being exposed. At least one. (A <code>MolecularEntity</code> is <strong>not</strong> allowed here — see note above.)</td>
+<td>The input cell sample(s) being exposed. At least one.</td>
 </tr>
 <tr>
 <td>parameterValue</td>
@@ -1002,7 +992,7 @@ one row per well giving cell line, compound, concentration and exposure duration
 <td>executesLabProtocol</td>
 <td>MUST</td>
 <td><a href="#labprotocol---protocol-record">bioschemas.org/LabProtocol</a></td>
-<td>The step's protocol record: exactly one (SHOULD), whose <code>reagent</code>s MUST include at least one test or control compound (a MolecularEntity).</td>
+<td>The step's protocol record; exactly one SHOULD be declared, whose <code>reagent</code>s MUST include at least one test or control compound (a MolecularEntity).</td>
 </tr>
 </tbody>
 </table>
@@ -1088,7 +1078,7 @@ record, assay protocol (BAO:0000523).</p>
 <td>executesLabProtocol</td>
 <td>MUST</td>
 <td><a href="#labprotocol---protocol-record">bioschemas.org/LabProtocol</a></td>
-<td>The step's protocol record: exactly one (SHOULD).</td>
+<td>The step's protocol record; exactly one SHOULD be declared.</td>
 </tr>
 </tbody>
 </table>
@@ -1149,7 +1139,7 @@ for this step:</p>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that derives the reported results from the raw measurements, typed by the
 <code>intendedUse</code> of its protocol record, data transformation (OBI:0200000). It consumes the raw-data File(s)
 produced by the <a href="#labprocess---endpoint-readout">Endpoint Readout</a> and declares the processed-data File(s) as its
-result. It corresponds to the <em>analysis and statistics</em> module of <a href="https://fairsharing.org/5228">MIT Nanosafety</a>.</p>
+result.</p>
 <table>
 <thead>
 <tr>
@@ -1200,7 +1190,7 @@ result. It corresponds to the <em>analysis and statistics</em> module of <a href
 <td>executesLabProtocol</td>
 <td>MUST</td>
 <td><a href="#labprotocol---protocol-record">bioschemas.org/LabProtocol</a></td>
-<td>The step's protocol record: exactly one (SHOULD), which SHOULD be <code>isBasedOn</code> the deposited analysis script (a File co-typed <code>SoftwareSourceCode</code> and <code>LabProtocol</code>).</td>
+<td>The step's protocol record; exactly one SHOULD be declared, and it SHOULD be <code>isBasedOn</code> the deposited analysis script (a File co-typed <code>SoftwareSourceCode</code> and <code>LabProtocol</code>).</td>
 </tr>
 </tbody>
 </table>
@@ -1238,8 +1228,7 @@ OECD Harmonised Template 201's <em>Data &amp; Analysis</em> module, are recommen
 (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprotocol">ISA LabProtocol</a>). Each LabProcess executes exactly one protocol record. The record is present
 whether or not a document was deposited, since its <code>intendedUse</code> determines the type of the step. A deposited
 standard operating procedure is a <code>File</code> additionally typed <code>LabProtocol</code>, referenced by the record through
-<code>isBasedOn</code>; one document may therefore serve several steps. ISA-JSON defines no <code>isBasedOn</code> on a protocol, and
-this reference is consequently lost on conversion.</p>
+<code>isBasedOn</code>; one document may therefore serve several steps.</p>
 <table>
 <thead>
 <tr>
@@ -1289,7 +1278,7 @@ this reference is consequently lost on conversion.</p>
 <tr>
 <td>reagent</td>
 <td>MAY</td>
-<td><a href="#molecularentity---chemical">bioschemas.org/MolecularEntity</a></td>
+<td><a href="#molecularentity---test-and-control-chemicals">bioschemas.org/MolecularEntity</a></td>
 <td>The compounds the protocol applied. On the Exposure's record this is a MUST: the test and control compounds, at least one, checked on the Exposure step.</td>
 </tr>
 <tr>
@@ -1326,8 +1315,5 @@ this reference is consequently lost on conversion.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="example-ro-crate-metadatajson">Example ro-crate-metadata.json</h2>
-<p>A conforming crate is one produced by the reference implementation,
-<a href="https://github.com/johannehouweling/vitro-crate">vitro-crate</a>.</p>
 </body>
 </html>
