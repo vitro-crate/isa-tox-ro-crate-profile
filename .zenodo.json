@@ -1,0 +1,44 @@
+{
+  "title": "ISA-Tox RO-Crate Profile",
+  "description": "<p>An RO-Crate profile for <em>in vitro</em> toxicology studies and New Approach Methodologies. It extends the ISA RO-Crate Profile with ontology-backed requirements on chemicals, test systems and the four experimental step types, and with SHACL shapes that check them.</p><p>Specification text CC BY 4.0; the SHACL shapes are MIT and live in the reference implementation, <a href=\"https://github.com/johannehouweling/vitro-crate\">vitro-crate</a>.</p>",
+  "upload_type": "publication",
+  "publication_type": "technicalnote",
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "version": "1.0.0",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Houweling, Jente",
+      "orcid": "0009-0005-3680-0645"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/",
+      "relation": "isIdenticalTo",
+      "resource_type": "publication-technicalnote",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/nfdi4plants/isa-ro-crate-profile",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/johannehouweling/vitro-crate",
+      "relation": "isSupplementedBy",
+      "scheme": "url"
+    }
+  ],
+  "keywords": [
+    "RO-Crate",
+    "FAIR",
+    "in vitro toxicology",
+    "New Approach Methodology",
+    "ISA",
+    "SHACL",
+    "Adverse Outcome Pathway",
+    "research data management"
+  ]
+}

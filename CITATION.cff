@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: ISA-Tox RO-Crate Profile
+message: If you use this profile, please cite it.
+type: dataset
+authors:
+  - given-names: Jente
+    family-names: Houweling
+    orcid: https://orcid.org/0009-0005-3680-0645
+repository-code: https://github.com/vitro-crate/isa-tox-ro-crate-profile
+url: https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-11-12
+keywords:
+  - RO-Crate
+  - FAIR
+  - in vitro toxicology
+  - New Approach Methodology
+  - ISA
+  - SHACL
