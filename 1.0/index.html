@@ -113,7 +113,7 @@ description with the SHACL shapes is published at
 <a href="https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/ro-crate-metadata.json">https://vitro-crate.github.io/isa-tox-ro-crate-profile/1.0/ro-crate-metadata.json</a>.</p>
 <h2 id="requirements">Requirements</h2>
 <p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays.</p>
-<h3 id="study-adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
+<h3 id="study---adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
 <p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study links the Adverse Outcome Pathway it addresses
 via <code>schema:mentions</code>, by its AOP-Wiki IRI <code>https://aopwiki.org/aops/&lt;id&gt;</code>.</p>
 <p>The following rows are those of the ISA Study, reproduced with the requirement levels this profile assigns.
@@ -225,7 +225,7 @@ identifiers, each identifier is a PropertyValue whose <code>propertyID</code> de
 </tr>
 </tbody>
 </table>
-<h3 id="assay-key-event">Assay - Key Event</h3>
+<h3 id="assay---key-event">Assay - Key Event</h3>
 <p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and links the Key Event it
 reads out via <code>schema:mentions</code>, by its AOP-Wiki IRI <code>https://aopwiki.org/events/&lt;id&gt;</code>. What it measures is named in
 <a href="https://bioassayontology.org/">BAO</a> terms through <code>measurementMethod</code> and <code>measurementTechnique</code>.</p>
@@ -315,7 +315,7 @@ reads out via <code>schema:mentions</code>, by its AOP-Wiki IRI <code>https://ao
 </tr>
 </tbody>
 </table>
-<h3 id="molecularentity-test-and-control-chemicals">MolecularEntity - Test and Control Chemicals</h3>
+<h3 id="molecularentity---test-and-control-chemicals">MolecularEntity - Test and Control Chemicals</h3>
 <p>Test and control chemicals are represented as <a href="https://bioschemas.org/MolecularEntity">MolecularEntity</a>
 instances, each denoting a single defined molecule and bearing the structural properties specified below. Test items that are mixtures are outside the scope of this version.</p>
 <p>Concentration is <strong>not</strong> a property of the compound. It is recorded per well in the
@@ -386,7 +386,7 @@ instances, each denoting a single defined molecule and bearing the structural pr
 </tr>
 </tbody>
 </table>
-<h3 id="sample-source-cells">Sample - Source Cells</h3>
+<h3 id="sample---source-cells">Sample - Source Cells</h3>
 <p>Based on the Bioschemas <a href="https://bioschemas.org/Sample">Sample</a> type (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">ISA Sample</a>). Source cells are
 the material from which a <a href="#labprocess---test-system-preparation">Test System Preparation</a> proceeds. The
 <code>sampleType</code> property classifies the material. Cell lines and
@@ -504,7 +504,7 @@ The sections below are selected by this term.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="source-cells-cell-line">Source Cells - Cell Line</h4>
+<h4 id="source-cells---cell-line">Source Cells - Cell Line</h4>
 <p><code>sampleType</code> "cell line" → <a href="http://purl.obolibrary.org/obo/NCIT_C16403">NCIT:C16403</a>: an immortalized line,
 identified by its Cellosaurus accession.</p>
 <table>
@@ -561,7 +561,7 @@ identified by its Cellosaurus accession.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="source-cells-primary-cells">Source Cells - Primary Cells</h4>
+<h4 id="source-cells---primary-cells">Source Cells - Primary Cells</h4>
 <p><code>sampleType</code> "primary cell" → <a href="http://www.ebi.ac.uk/efo/EFO_0002660">EFO:0002660</a>. Primary cells are taken directly
 from donor tissue and are not immortalized. Cellosaurus holds no record for them and assigns them no RRID
 (<a href="https://www.cellosaurus.org/faq">FAQ Q19</a>), so the source is described by the species and the cell type it was
@@ -713,7 +713,7 @@ property in the table above, not as a characteristic.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sample-test-system">Sample - Test System</h3>
+<h3 id="sample---test-system">Sample - Test System</h3>
 <p>The test system a <a href="#labprocess---test-system-preparation">Test System Preparation</a> produces from its
 <a href="#sample---source-cells">Source Cells</a>. Its <code>sampleType</code> is "cell culture"
 → <a href="http://purl.obolibrary.org/obo/OBI_0001876">OBI:0001876</a>.</p>
@@ -770,7 +770,7 @@ property in the table above, not as a characteristic.</p>
 <li>A test system derives from <strong>at most one</strong> parent Sample. Culture each source separately, or type material grown
   from several sources as a <a href="#test-system---co-culture">co-culture</a>.</li>
 </ul>
-<h4 id="test-system-co-culture">Test System - Co-Culture</h4>
+<h4 id="test-system---co-culture">Test System - Co-Culture</h4>
 <p><code>sampleType</code> "co-culture" → <a href="http://purl.obolibrary.org/obo/NCIT_C93168">NCIT:C93168</a>: a test system grown from two
 or more source cells. One source grown alone is an ordinary test system, not a co-culture.</p>
 <table>
@@ -821,13 +821,13 @@ or more source cells. One source grown alone is an ordinary test system, not a c
 </tr>
 </tbody>
 </table>
-<h3 id="sample-exposed-test-system">Sample - Exposed Test System</h3>
+<h3 id="sample---exposed-test-system">Sample - Exposed Test System</h3>
 <p>The test system following application of the chemical. It carries the requirements of the
 <a href="#sample---test-system">Test System</a> and declares <code>isBasedOn</code> the test system from which it was exposed, and so
 has no table of its own. The exposed material is identified by the step rather than by the Sample: an Exposure
 MUST declare the test system as <code>schema:object</code> and the exposed material as <code>schema:result</code>. Traversing
 <code>isBasedOn</code> in reverse yields the derivation chain: exposed test system → test system → source cells.</p>
-<h3 id="labprocess-test-system-preparation">LabProcess - Test System Preparation</h3>
+<h3 id="labprocess---test-system-preparation">LabProcess - Test System Preparation</h3>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that prepares the biological model from its source cells, including its
 maintenance in culture, typed by the <code>intendedUse</code> of its protocol record, one of the preparation types
 below. A test system may be prepared in several steps. A stably modified line constitutes the source material
@@ -929,7 +929,7 @@ for this step:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="labprocess-exposure">LabProcess - Exposure</h3>
+<h3 id="labprocess---exposure">LabProcess - Exposure</h3>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that exposes the test system to one or more chemicals, typed by the
 <code>intendedUse</code> of its protocol record, treatment protocol (EFO:0003969). It declares the cultured
 <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#sample">Sample</a> as <code>object</code>, executes a protocol record naming the compounds applied, and declares the
@@ -1019,7 +1019,7 @@ for this step:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="labprocess-endpoint-readout">LabProcess - Endpoint Readout</h3>
+<h3 id="labprocess---endpoint-readout">LabProcess - Endpoint Readout</h3>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that measures the assay endpoint, typed by the <code>intendedUse</code> of its protocol
 record, assay protocol (BAO:0000523).</p>
 <table>
@@ -1129,7 +1129,7 @@ for this step:</p>
 <p><strong>Note:</strong> <code>propertyID</code> IRIs are given in each ontology's native canonical form (OBO Foundry PURLs, EFO under
 <code>www.ebi.ac.uk/efo/</code>, BAO under <code>www.bioassayontology.org/bao#</code>) rather than routed through a single resolver.</p>
 </blockquote>
-<h3 id="labprocess-data-analysis">LabProcess - Data Analysis</h3>
+<h3 id="labprocess---data-analysis">LabProcess - Data Analysis</h3>
 <p>A <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprocess">LabProcess</a> that derives the reported results from the raw measurements, typed by the
 <code>intendedUse</code> of its protocol record, data transformation (OBI:0200000). It consumes the raw-data File(s)
 produced by the <a href="#labprocess---endpoint-readout">Endpoint Readout</a> and declares the processed-data File(s) as its
@@ -1217,7 +1217,7 @@ OECD Harmonised Template 201's <em>Data &amp; Analysis</em> module, are recommen
 </tr>
 </tbody>
 </table>
-<h3 id="labprotocol-protocol-record">LabProtocol - Protocol record</h3>
+<h3 id="labprotocol---protocol-record">LabProtocol - Protocol record</h3>
 <p>Based on the Bioschemas <a href="https://bioschemas.org/LabProtocol">LabProtocol</a> type
 (<a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#labprotocol">ISA LabProtocol</a>). Each LabProcess executes exactly one protocol record. The record is present
 whether or not a document was deposited, since its <code>intendedUse</code> determines the type of the step. A deposited
