@@ -114,13 +114,8 @@ description with the SHACL shapes is published at
 <h2 id="requirements">Requirements</h2>
 <p>An Investigation MUST include at least one Exposure referenced by one of its Studies or Assays.</p>
 <h3 id="study-adverse-outcome-pathway">Study - Adverse Outcome Pathway</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study should address one Adverse Outcome Pathway via <code>schema:mentions</code>;
-its assays annotate the Key Events (<a href="#assay---key-event">Assay - Key Event</a>). The referenced node is the AOP-Wiki
-entity: <code>@id</code> is <code>https://identifiers.org/aop/&lt;id&gt;</code>, typed <code>AdverseOutcomePathway</code>
-(<a href="http://aopkb.org/aop_ontology#AdverseOutcomePathway">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>, with the wiki
-page as <code>url</code>. A crate MAY carry the surrounding subgraph: Key Events (<code>aop.events/&lt;id&gt;</code>) and
-<code>KeyEventRelationship</code> nodes (<code>aop.relationships/&lt;id&gt;</code>) cross-linked by <code>upstream_event</code> and <code>downstream_event</code>.
-The adverse outcome is reached through the pathway's <code>has_adverse_outcome</code>, not named on the Study.</p>
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#study">ISA Study</a>. A study links the Adverse Outcome Pathway it addresses
+via <code>schema:mentions</code>, by its AOP-Wiki IRI <code>https://aopwiki.org/aops/&lt;id&gt;</code>.</p>
 <p>The following rows are those of the ISA Study, reproduced with the requirement levels this profile assigns.
 <code>mentions</code> is introduced by this profile.</p>
 <table>
@@ -166,8 +161,8 @@ The adverse outcome is reached through the pathway's <code>has_adverse_outcome</
 <tr>
 <td>mentions</td>
 <td>SHOULD</td>
-<td><a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a></td>
-<td>The Adverse Outcome Pathway the study addresses, as its AOP-Wiki node.</td>
+<td>URL</td>
+<td>The AOP-Wiki IRI of the Adverse Outcome Pathway the study addresses.</td>
 </tr>
 <tr>
 <td>about</td>
@@ -231,9 +226,8 @@ identifiers, each identifier is a PropertyValue whose <code>propertyID</code> de
 </tbody>
 </table>
 <h3 id="assay-key-event">Assay - Key Event</h3>
-<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and names the KeyEvent it
-reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://identifiers.org/aop.events/&lt;id&gt;</code>, typed <code>KeyEvent</code>
-(<a href="http://aopkb.org/aop_ontology#KeyEvent">AOPO</a>) and <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a>. What it measures is named in
+<p>Is based on the <a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#assay">ISA Assay</a>. An assay measures one endpoint and links the Key Event it
+reads out via <code>schema:mentions</code>, by its AOP-Wiki IRI <code>https://aopwiki.org/events/&lt;id&gt;</code>. What it measures is named in
 <a href="https://bioassayontology.org/">BAO</a> terms through <code>measurementMethod</code> and <code>measurementTechnique</code>.</p>
 <p>The following rows are those of the ISA Assay, reproduced with the requirement levels this profile assigns.
 <code>mentions</code> is introduced by this profile.</p>
@@ -274,8 +268,8 @@ reads out via <code>schema:mentions</code>: <code>@id</code> is <code>https://id
 <tr>
 <td>mentions</td>
 <td>SHOULD</td>
-<td><a href="https://github.com/nfdi4plants/isa-ro-crate-profile/blob/1.0.0-draft.1/profile/isa_ro_crate.md#definedterm">DefinedTerm</a></td>
-<td>The Key Event this assay's endpoint reads out, as its AOP-Wiki node.</td>
+<td>URL</td>
+<td>The AOP-Wiki IRI of the Key Event this assay's endpoint reads out.</td>
 </tr>
 <tr>
 <td>name</td>
