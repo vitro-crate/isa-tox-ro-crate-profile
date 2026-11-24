@@ -1,0 +1,57 @@
+# This repository holds only generated output. The profile's sources (the spec
+# page and the SHACL shapes) live in johannehouweling/vitro-crate; this job
+# rebuilds 1.0/ from its main branch and commits the result when it changed.
+name: Regenerate from vitro-crate
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [vitro-crate-updated]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regenerate
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Check out the sources
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          repository: johannehouweling/vitro-crate
+          ref: main
+          path: vitro-crate
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version-file: vitro-crate/.python-version
+
+      - name: Regenerate 1.0/
+        run: |
+          uv sync --project vitro-crate
+          rm -rf 1.0
+          uv run --project vitro-crate python vitro-crate/scripts/gen_profile_crate.py --out 1.0
+
+      - name: Commit if anything changed
+        run: |
+          git add -A 1.0
+          if git diff --cached --quiet; then
+            echo "Already up to date with vitro-crate@$(git -C vitro-crate rev-parse --short HEAD)."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898799+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: regenerate from vitro-crate@$(git -C vitro-crate rev-parse --short HEAD)"
+          git push
